@@ -538,3 +538,4 @@ C:\Dev-Teste\AspNet MVC\AspNet MVC\obj\Debug\net9.0\refint\AspNet MVC.dll
 C:\Dev-Teste\AspNet MVC\AspNet MVC\obj\Debug\net9.0\AspNet MVC.pdb
 C:\Dev-Teste\AspNet MVC\AspNet MVC\obj\Debug\net9.0\AspNet MVC.genruntimeconfig.cache
 C:\Dev-Teste\AspNet MVC\AspNet MVC\obj\Debug\net9.0\ref\AspNet MVC.dll
+C:\Dev-Teste\AspNet MVC\AspNet MVC\obj\Debug\net9.0\AspNet MVC.sourcelink.json

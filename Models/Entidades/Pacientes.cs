@@ -8,4 +8,5 @@ public class Pacientes
     public string cidade { get; set; } = string.Empty;
     public string CPF { get; set; } = string.Empty;
     public string doenca { get; set; } = string.Empty;
+    public string imagePath { get; set; } = string.Empty;
 }

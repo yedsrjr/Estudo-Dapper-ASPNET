@@ -16,7 +16,8 @@ public class PacientesRepository : AbstractRepository<Pacientes>
             nome = @nome, 
             idade = @idade, 
             CPF = @cpf, 
-            doenca = @doenca
+            doenca = @doenca,
+            imagePath = @imagePath
         where codp = @codp
         ";
 
@@ -60,8 +61,8 @@ public class PacientesRepository : AbstractRepository<Pacientes>
     {
         string queryID = "SELECT MAX(codp) codp FROM Pacientes";
 
-        string query = @"INSERT INTO Pacientes(codp, nome, idade, CPF, cidade, doenca)
-            VALUES (@codp, @nome, @idade, @CPF, @cidade, @doenca)";
+        string query = @"INSERT INTO Pacientes(codp, nome, idade, CPF, cidade, doenca, imagePath)
+            VALUES (@codp, @nome, @idade, @CPF, @cidade, @doenca, @imagePath)";
 
         using (var connection = context.CretateConnection())
         {

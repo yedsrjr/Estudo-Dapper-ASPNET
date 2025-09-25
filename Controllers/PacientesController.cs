@@ -3,15 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Data;
 using Models.Entidades;
 using Models.ViewModel;
+using AspNet_MVC.Models.Mapping;
+
 namespace AspNet_MVC.Controllers;
 
 public class PacientesController : Controller
 {
     private readonly PacientesRepository repository;
-    public PacientesController(PacientesRepository _repository)
+    private readonly IWebHostEnvironment env;
+    public PacientesController(PacientesRepository _repository, IWebHostEnvironment _env)
     {
         repository = _repository;
-    }
+        env = _env;
+    }   
 
     public IActionResult Index()
     {
@@ -57,24 +61,29 @@ public class PacientesController : Controller
     }
 
     [HttpPost]
-    public IActionResult Salvar(PacientesViewModel model)
+    public async Task<IActionResult> Salvar(PacientesViewModel model)
     {
         if (ModelState.IsValid)
         {
-            Pacientes newModel = new Pacientes
+            if (model.Image != null && model.Image.Length > 0)
             {
-                codp = model.codp,
-                nome = model.nome,
-                idade = model.idade,
-                cidade = model.cidade,
-                CPF = model.CPF,
-                doenca = model.doenca
-            };
+                var fileName = Path.GetFileName(model.Image.FileName);
+                var folderPath = Path.Combine(env.WebRootPath, "Imagens");
+
+                if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+                var filePath = Path.Combine(folderPath, fileName);
+                model.imagePath = fileName;
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(stream);
+                }
+            }
 
             if (model.codp == 0)
-                repository.Salvar(newModel);
+                repository.Salvar(model.ToPaciente());
             else
-                repository.Atualizar(newModel);
+                repository.Atualizar(model.ToPaciente());
         }
         return RedirectToAction("Index");
     }
