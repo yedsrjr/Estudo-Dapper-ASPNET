@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediClinic - Sistema de Gestão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-4 border-blue-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">M</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">MediClinic</h1>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <span id="currentDate"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <nav class="mb-8">
+            <div class="flex flex-wrap gap-2 bg-white rounded-xl p-2 shadow-md">
+                <button onclick="showSection('dashboard')" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
+                    📊 Dashboard
+                </button>
+                <button onclick="showSection('pacientes')" class="nav-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:bg-blue-700">
+                    👥 Pacientes
+                </button>
+                <button onclick="showSection('medicos')" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
+                    👨‍⚕️ Médicos
+                </button>
+                <button onclick="showSection('consultas')" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
+                    📅 Consultas
+                </button>
+                <button onclick="showSection('ambulatorios')" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
+                    🏥 Ambulatórios
+                </button>
+                <button onclick="showSection('funcionarios')" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
+                    👔 Funcionários
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Pacientes Section -->
+    <div id="pacientes" class="section hidden fade-in">
+            <div class="bg-white rounded-xl shadow-md">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-semibold text-gray-800">Gestão de Pacientes</h2>
+                        <button onclick="showAddModal('pacientes')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all">
+                            + Novo Paciente
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <input type="text" id="searchPacientes" placeholder="Buscar pacientes..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onkeyup="filterTable('pacientesTable', this.value)">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Nome</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">CPF</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Telefone</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Email</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pacientesTable" class="divide-y divide-gray-200">
+                                <tr>
+                                    <td colspan="5" class="px-4 py-8 text-center text-gray-500">Nenhum paciente cadastrado</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+<script>
+    function updateDateTime() {
+        const now = new Date();
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit" 
+        };
+        const formatted = now.toLocaleDateString("pt-BR", options);
+        document.getElementById("currentDate").textContent = formatted;
+    }
+
+    // Atualiza ao carregar
+    updateDateTime();
+    // Atualiza em tempo real (a cada 1 segundo)
+    setInterval(updateDateTime, 1000);
+</script>

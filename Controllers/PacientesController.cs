@@ -4,6 +4,7 @@ using Models.Data;
 using Models.Entidades;
 using Models.ViewModel;
 using AspNet_MVC.Models.Mapping;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AspNet_MVC.Controllers;
 
@@ -20,6 +21,14 @@ public class PacientesController : Controller
     public IActionResult Index()
     {
         var ListaPacientes = repository.BuscarTodos();
+        
+        foreach (var item in ListaPacientes)
+        {
+            if (item.imagePath.IsNullOrEmpty())
+            {
+                item.imagePath = null;
+            }
+        }
         var NovaListaPacientes = ListaPacientes.Select(model => new PacientesViewModel
         {
                 codp = model.codp,
@@ -27,8 +36,10 @@ public class PacientesController : Controller
                 idade = model.idade,
                 cidade = model.cidade,
                 CPF = model.CPF,
-                doenca = model.doenca
+                doenca = model.doenca,
+                imagePath = model.imagePath
         }).ToList();
+
         return View("Listar", NovaListaPacientes);
     }
     public IActionResult Cadastro(int codp = 0)
@@ -48,7 +59,8 @@ public class PacientesController : Controller
                 idade = model.idade,
                 cidade = model.cidade,
                 CPF = model.CPF,
-                doenca = model.doenca
+                doenca = model.doenca,
+                imagePath = model.imagePath
             };
             return View(newModel);
         }

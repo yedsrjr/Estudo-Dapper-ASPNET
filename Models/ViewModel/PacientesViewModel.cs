@@ -1,5 +1,6 @@
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Models.ViewModel;
 
@@ -28,8 +29,9 @@ public class PacientesViewModel
     [Required(ErrorMessage = "A doença é obrigatório")]
     public string doenca { get; set; } = string.Empty;
 
-    [Display(Name = "Foto")]
-    public string? imagePath { get; set; } = string.Empty;
-    
     public IFormFile? Image {get; set;}
+    
+    [ValidateNever]
+    public string? imagePath { get; set; }
+    
 }
