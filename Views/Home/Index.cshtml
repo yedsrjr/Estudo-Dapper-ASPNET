@@ -37,9 +37,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <nav class="mb-8">
         <div class="flex flex-wrap gap-2 bg-white rounded-xl p-2 shadow-md">
-            <button onclick="showSection('dashboard')" class="nav-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:bg-blue-700">
+            <a  asp-controller="Home" asp-action="Index" class="nav-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:bg-blue-700">
                 📊 Dashboard
-            </button>
+            </a>
             <a asp-controller="Pacientes" asp-action="Index" class="nav-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium transition-all hover:bg-gray-200">
                 👥 Pacientes
             </a>
