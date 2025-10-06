@@ -15,6 +15,8 @@ builder.Services.AddScoped<FuncionariosRepository>();
 builder.Services.AddScoped<ConsultasServices>();
 builder.Services.AddScoped<AmbulatoriosServices>();
 builder.Services.AddScoped<PacientesServices>();
+builder.Services.AddScoped<MedicosServices>();
+builder.Services.AddScoped<FuncionariosServices>();
 
 var app = builder.Build();
 
