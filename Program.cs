@@ -1,5 +1,6 @@
 using AspNet_MVC.Models.Entidades;
 using Models.Data;
+using Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddScoped<ConsultasRepository>();
 builder.Services.AddScoped<MedicosRepository>();
 builder.Services.AddScoped<AmbulatoriosRepository>();
 builder.Services.AddScoped<FuncionariosRepository>();
+builder.Services.AddScoped<ConsultasServices>();
+builder.Services.AddScoped<AmbulatoriosServices>();
+builder.Services.AddScoped<PacientesServices>();
 
 var app = builder.Build();
 
