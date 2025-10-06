@@ -83,18 +83,19 @@
                             <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Cidade</th>
                             <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">CPF</th>
                             <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Doença</th>
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Ações</th>
+                            <th class="px-4 py-3 text-center text-sm font-medium text-gray-700">Ações</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        @foreach(var item in Model)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td class="px-2 py-1">
                                     <img src="@(item.imagePath == null ?
-                                            path + "profileDefault.png" :  
+                                            path + "profileDefault.png" :
                                             path + item.imagePath)"
-                                    class="img-thumbnail rounded-circle shadow-sm" style="width: 50px; height: 50px; object-fit: cover" />
+                                        class="img-thumbnail rounded-circle shadow-sm"
+                                        style="width: 50px; height: 50px; object-fit: cover" />
                                 </td>
 
                                 <td class="px-4 py-3 text-center text-sm text-gray-900">
@@ -115,8 +116,18 @@
                                 <td class="px-4 py-3 text-left text-sm text-gray-900">
                                     @Html.DisplayFor(model => item.doenca)
                                 </td>
-                                <td class="px-4 py-3 text-red-600 hover:text-red-800 transition-all">
-                                    @Html.ActionLink("Excluir", "Excluir", "Pacientes", new { codp = item.codp })
+
+                                <!-- Coluna unificada de Ações -->
+                                <td class="px-4 py-3 text-right text-sm">
+                                    <a href="@Url.Action("Cadastro", "Pacientes", new { codp = item.codp })"
+                                    class="text-yellow-600 hover:text-yellow-800 transition-all font-medium">
+                                        Editar
+                                    </a>
+                                    <span class="text-gray-400 mx-2">|</span>
+                                    <a href="@Url.Action("Excluir", "Pacientes", new { codp = item.codp })"
+                                    class="text-red-600 hover:text-red-800 transition-all font-medium">
+                                        Excluir
+                                    </a>
                                 </td>
                             </tr>
                         }
